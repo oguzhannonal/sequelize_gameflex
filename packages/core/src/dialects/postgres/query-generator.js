@@ -1,11 +1,11 @@
 'use strict';
-
+/* eslint-disable */
 import { EMPTY_OBJECT } from '../../utils/object.js';
 import { defaultValueSchemable } from '../../utils/query-builder-utils';
 import { generateIndexName } from '../../utils/string';
 import { ENUM } from './data-types';
 import { quoteIdentifier, removeTicks } from '../../utils/dialect';
-import { rejectInvalidOptions } from '../../utils/check';
+/mport { rejectInvalidOptions } from '../../utils/check';
 import {
   CREATE_DATABASE_QUERY_SUPPORTABLE_OPTIONS,
   CREATE_SCHEMA_QUERY_SUPPORTABLE_OPTIONS,
@@ -245,6 +245,11 @@ export class PostgresQueryGenerator extends PostgresQueryGeneratorTypeScript {
 
       if (definition.includes('REFERENCES')) {
         definition = definition.replace(/.+?(?=REFERENCES)/, '');
+        attrSql += query(
+          `DROP CONSTRAINT IF EXISTS
+            ${tableName}_${attributeName}_fkey
+          `
+        ).replace('ALTER COLUMN', '')
         attrSql += query(`ADD FOREIGN KEY (${this.quoteIdentifier(attributeName)}) ${definition}`).replace('ALTER COLUMN', '');
       } else {
         attrSql += query(`${this.quoteIdentifier(attributeName)} TYPE ${definition}`);
