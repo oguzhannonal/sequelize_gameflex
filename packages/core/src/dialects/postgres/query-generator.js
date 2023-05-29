@@ -5,7 +5,7 @@ import { defaultValueSchemable } from '../../utils/query-builder-utils';
 import { generateIndexName } from '../../utils/string';
 import { ENUM } from './data-types';
 import { quoteIdentifier, removeTicks } from '../../utils/dialect';
-/mport { rejectInvalidOptions } from '../../utils/check';
+import { rejectInvalidOptions } from '../../utils/check';
 import {
   CREATE_DATABASE_QUERY_SUPPORTABLE_OPTIONS,
   CREATE_SCHEMA_QUERY_SUPPORTABLE_OPTIONS,
